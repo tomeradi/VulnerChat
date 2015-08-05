@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leaky Chat</title>
+    <style type="text/css">
+      /* palette: http://www.colourlovers.com/palette/3841867/Likes */
+      /* hope (blue) #28C7EF */
+      /* agatha #1 (pink) #B01468 */
+      /* purple/pink #740565 */
+      /* black #121212 */
+      /* white #ffffff */
+      body {
+        color: #ededed;
+        font-family: Tahoma, Verdana, Segoe, sans-serif;
+        font-size: 18pt;
+        padding: 2em;
+      }
+      input, textarea, select, button {
+        color: #121212;
+        font-size: 18pt;
+      }
+      button {
+        background: #28C7EF;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        box-shadow: none;
+        color: #ffffff;
+        padding: 0.25em;
+      }
+
+      span.user_name {
+        color: #787878;
+        font-size: 0.8em;
+      }
+
+      #enter_id {}
+      #enter_id form {}
+      #enter_id form input[type="text"] {
+        padding: 0.25em;
+        width: 15em;
+      }
+
+      #chat {
+        display: none;
+        position: relative;
+      }
+      #chat form {
+        bottom: 1em;
+        text-align: right;
+        position: fixed;
+      }
+      #chat form #msg {
+        padding: 0.25em;
+        text-align: left;
+        width: 25em;
+      }
+      #chat form button {
+        margin-top: 0.25em;
+        width: 5em;
+      }
+
+      #messages { 
+        color: #121212;
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+      }
+      #messages li {
+        padding: 0.25em;
+      }
+      #messages li:nth-child(odd) {
+        background-color: #efefef;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- only displayed until the user joins the chat -->
+    <div id="enter_id">
+      <form action="">
+        <input type="text" id="user_name" value="Random User" />
+        <button>Chat</button>
+      </form>
+    </div>
+
+    <!-- regular chat interface -->
+    <div id="chat">
+      <ul id="messages"></ul>
+      <form action="">
+        <input id="msg" autocomplete="off" /><br /><button>Send</button>
+      </form>
+    </div>
+
+    <!-- chat mechanics -->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+
+      $('#enter_id form').submit(function(){
+        socket.emit('user_login', $('#user_name').val());
+        $('#enter_id').hide('slow');
+        $('#chat').show('fast');
+        return false;
+      });
+
+      $('#chat form').submit(function(){
+        socket.emit('chat_message', { 'user': $('#user_name').val(), 'message': $('#msg').val() } );
+        $('#msg').val('');
+        return false;
+      });
+      socket.on('chat_message', function(msg){
+        if (msg.user == $('#user_name').val()) {
+          // your own message
+          $('#messages').append($('<li>').html(msg.message));
+        } else {
+          // someone else send this
+          $('#messages').append($('<li>').html('<span class="user_name">' + msg.user + ':</span> ' + msg.message));
+        }
+      });
+    </script>
+  </body>
+</html>
