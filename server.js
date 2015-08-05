@@ -20,7 +20,7 @@ io.on('connection', function(socket){
   socket.on('user_login', function(user_name) {
   	console.log('new user: ' + user_name);
   	// announce the user 
-  	io.emit('chat_message', user_name + ' joined the chat');
+  	io.emit('chat_message', { 'user': 'Leakybot', 'message': user_name + ' joined the chat' });
 
   	users[user_name] = socket.id; 	
   	// return the latest messages from the chat history to this user
