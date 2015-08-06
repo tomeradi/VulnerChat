@@ -11,3 +11,11 @@ I wrote this [node.js](https://nodejs.org) chat application with the express int
 **Please do not use this in production, it's not a real chat application!**
 
 A chat application is very easy to pull together in node and it's a great platform to illustrate these security challenges. I started with [this great tutorial](http://socket.io/get-started/chat/) from Socket.IO and kept iterating new features as needed.
+
+## Attacks
+
+Here's a simple cross-site scripting (XSS) attack to show that highlights the power the XSS:
+
+```javascript
+<script>$('#messages').empty();$('#messages').append('<li>Successful XSS attack</li>');</script>
+```

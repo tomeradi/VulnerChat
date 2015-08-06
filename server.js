@@ -49,6 +49,7 @@ function send_message(msg_obj) {
 	timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
 	msg_obj['timestamp'] = timestamp;
 	io.emit('chat_message', msg_obj);
+	/*
 	try {
 		var cmd = db.prepare("INSERT INTO messages VALUES ('" + msg_obj.user + "','" + timestamp + "','" + msg_obj.message + "');");
 		cmd.run();
@@ -57,6 +58,7 @@ function send_message(msg_obj) {
 		console.log('Could not save message to database');
 		console.log(err);
 	}
+	*/
 }
 
 io.on('connection', function(socket){
