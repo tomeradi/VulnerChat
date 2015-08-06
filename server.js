@@ -45,8 +45,17 @@ app.get('/chat', function(req, res){
   res.sendFile(__dirname + '/html/chat.html');
 });
 
-function send_message(message) {
-	io.emit('chat_message', message);
+function send_message(msg_obj) {
+	io.emit('chat_message', msg_obj);
+	try {
+		console.log(msg_obj.user);
+		var cmd = db.prepare("INSERT INTO messages VALUES ('" + msg_obj.user + "','___','" + msg_obj.message + "');");
+		cmd.run();
+		cmd.finalize();
+	} catch(err) {
+		console.log('Could not save message to database');
+		console.log(err);
+	}
 }
 
 io.on('connection', function(socket){
