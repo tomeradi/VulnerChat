@@ -11,12 +11,29 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('leakychat.db'); // :memory: also an option
 var users = {};
 
+// set an exit handler as per http://stackoverflow.com/questions/14031763/doing-a-cleanup-action-just-before-node-js-exits
+process.stdin.resume(); // so the program will not close instantly
+function exitHandler(options, err) {
+	console.log('');
+    if (options.cleanup) {
+    	console.log('Cleaning before exit...');
+    	db.close();
+    }
+    if (err) {
+    	console.log('Uncaught exception or error');
+    	console.log(err.stack);
+    }
+    if (options.exit) { process.exit(); }
+}
+//process.on('exit', exitHandler.bind(null, { cleanup: true }));
+process.on('SIGINT', exitHandler.bind(null, {exit: true, cleanup: true })); // catch CTRL+C
+
+
+
 // setup the db table if it isn't already
 db.serialize(function() {
   db.run("CREATE TABLE IF NOT EXISTS messages (user_name TEXT, timestamp TEXT, body TEXT)");
 });
- 
-db.close();
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/html/index.html');
