@@ -17,7 +17,9 @@ function exitHandler(options, err) {
 	console.log('');
     if (options.cleanup) {
     	console.log('Cleaning before exit...');
-    	db.close();
+    	try {
+    		db.close();
+    	} catch (err) {}
     }
     if (err) {
     	console.log('Uncaught exception or error');
