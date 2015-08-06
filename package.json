@@ -1,9 +1,15 @@
 {
-  "name": "leaky-chat",
-  "version": "0.0.1",
-  "description": "A vulnerable and leaky chat application used for security demos",
-  "dependencies": {
-    "express": "^4.13.3",
-    "socket.io": "^1.3.6"
-  }
+	"name": "leaky-chat",
+	"version": "0.0.1",
+	"description": "A vulnerable and leaky chat application used for security demos",
+	"dependencies": {
+		"express": "^4.13.3",
+		"socket.io": "^1.3.6",
+		"sqlite3": "^3.0.9"
+		},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/marknca/leaky-chat.git"
+		},
+	"license" : "MIT"
 }
