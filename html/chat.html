@@ -110,13 +110,13 @@
         $('#msg').val('');
         return false;
       });
-      socket.on('chat_message', function(msg){
+      socket.on('chat_message', function(msg_obj){
         if (msg.user == $('#user_name').val()) {
           // your own message
-          $('#messages').append($('<li>').html(msg.message));
+          $('#messages').append($('<li>').html(msg_obj.message));
         } else {
-          // someone else send this
-          $('#messages').append($('<li>').html('<span class="user_name">' + msg.user + ':</span> ' + msg.message));
+          // someone else sent this
+          $('#messages').append($('<li>').html('<span class="user_name">' + msg_obj.user + ':</span> ' + msg_obj.message));
         }
       });
     </script>

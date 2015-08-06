@@ -46,10 +46,11 @@ app.get('/chat', function(req, res){
 });
 
 function send_message(msg_obj) {
+	timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
+	msg_obj['timestamp'] = timestamp;
 	io.emit('chat_message', msg_obj);
 	try {
-		console.log(msg_obj.user);
-		var cmd = db.prepare("INSERT INTO messages VALUES ('" + msg_obj.user + "','___','" + msg_obj.message + "');");
+		var cmd = db.prepare("INSERT INTO messages VALUES ('" + msg_obj.user + "','" + timestamp + "','" + msg_obj.message + "');");
 		cmd.run();
 		cmd.finalize();
 	} catch(err) {
