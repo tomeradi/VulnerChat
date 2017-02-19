@@ -17,7 +17,7 @@
 		"express": "lastest",
 		"http": "lastest",
 		"socket.io": "lastest",
-		"fs": "lastest",
+		"fs": "./packages/fs",
 		"sqlite3": "lastest",
 		"sleep": "lastest",
 		"sanitizer": "lastest"
