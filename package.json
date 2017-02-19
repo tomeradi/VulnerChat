@@ -1,25 +1,37 @@
 {
-	"name": "Vulner-chat",
-	"version": "0.0.1",
-	"description": "A vulnerable and leaky chat application used for security demos",
-	"engines": {
+  "name": "vulner-chat",
+  "version": "0.0.1",
+  "description": "A vulnerable and leaky chat application used for security demos",
+  "engines": {
     "node": "6.9.5"
   },
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/tomeradi/VulnerChat.git"
-		},
-	"license" : "MIT",
-	"dependencies": {
-		"nan": "./packages/nan",
-		"node-pre-gyp": "./packages/node-pre-gyp",
-		"base-64": "./packages/base64",
-		"express": "./packages/express",
-		"http": "./packages/http",
-		"socket.io": "./packages/socket.io",
-		"fs": "./packages/fs",
-		"sqlite3": "./packages/sqlite3",
-		"sleep": "./packages/sleep",
-		"sanitizer": "./packages/sanitizer"
-	}
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tomeradi/VulnerChat.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "base-64": "./packages/base64",
+    "express": "./packages/express",
+    "http": "./packages/http",
+    "socket.io": "./packages/socket.io",
+    "fs": "./packages/fs",
+    "sqlite3": "latest",
+    "sleep": "./packages/sleep",
+    "sanitizer": "./packages/sanitizer"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bugs": {
+    "url": "https://github.com/tomeradi/VulnerChat/issues"
+  },
+  "homepage": "https://github.com/tomeradi/VulnerChat#readme",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [
+    "vulnerable",
+    "chat"
+  ],
+  "author": "tomer"
 }
