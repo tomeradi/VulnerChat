@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
-var randomstring = require("randomstring");
+var uuid = require('node-uuid');
 var base64 = require('base-64');
 var sleep = require('sleep');
 var sanitizer = require('sanitizer');
@@ -224,7 +224,7 @@ function execute_command(command, args, socket, user_name) {
 					}
 
 					if (room_password == row.password) {
-						s = randomstring.generate();
+						s = uuid.v4();
 						room_token = room_name + ';' + s;
 
 						useable_tokens.push(room_token)
