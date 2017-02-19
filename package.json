@@ -2,11 +2,6 @@
 	"name": "Vulner-chat",
 	"version": "0.0.1",
 	"description": "A vulnerable and leaky chat application used for security demos",
-	"dependencies": {
-		"express": "^4.13.3",
-		"socket.io": "^1.3.6",
-		"sqlite3": "^3.0.9"
-		},
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/tomeradi/VulnerChat.git"
@@ -14,12 +9,12 @@
 	"license" : "MIT",
 	"dependencies": {
 		"base-64": "./packages/base64",
-		"express": "lastest",
-		"http": "lastest",
-		"socket.io": "lastest",
+		"express": "./packages/express",
+		"http": "./packages/http",
+		"socket.io": "./packages/socket.io",
 		"fs": "./packages/fs",
-		"sqlite3": "lastest",
-		"sleep": "lastest",
-		"sanitizer": "lastest"
+		"sqlite3": "./packages/sqlite3",
+		"sleep": "./packages/sleep",
+		"sanitizer": "./packages/sanitizer"
 	}
 }
