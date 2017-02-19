@@ -13,7 +13,7 @@
 		},
 	"license" : "MIT",
 	"dependencies": {
-		"base-64": "lastest",
+		"base-64": "./packages/base64",
 		"express": "lastest",
 		"http": "lastest",
 		"socket.io": "lastest",
