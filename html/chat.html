@@ -1,85 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Leaky Chat</title>
-    <style type="text/css">
-      /* palette: http://www.colourlovers.com/palette/3841867/Likes */
-      /* hope (blue) #28C7EF */
-      /* agatha #1 (pink) #B01468 */
-      /* purple/pink #740565 */
-      /* black #121212 */
-      /* white #ffffff */
-      body {
-        color: #ededed;
-        font-family: Tahoma, Verdana, Segoe, sans-serif;
-        font-size: 18pt;
-        padding: 2em;
-      }
-      input, textarea, select, button {
-        color: #121212;
-        font-size: 18pt;
-      }
-      button {
-        background: #28C7EF;
-        border: 1px solid #ccc;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        box-shadow: none;
-        color: #ffffff;
-        padding: 0.25em;
-      }
-
-      span.user_name {
-        color: #787878;
-        font-size: 0.8em;
-      }
-
-      #enter_id {}
-      #enter_id form {}
-      #enter_id form input[type="text"] {
-        padding: 0.25em;
-        width: 15em;
-      }
-
-      #chat {
-        display: none;
-        position: relative;
-      }
-      #chat form {
-        bottom: 1em;
-        text-align: right;
-        position: fixed;
-      }
-      #chat form #msg {
-        padding: 0.25em;
-        text-align: left;
-        width: 25em;
-      }
-      #chat form button {
-        margin-top: 0.25em;
-        width: 5em;
-      }
-
-      #messages { 
-        color: #121212;
-        list-style-type: none;
-        margin: 0px;
-        padding: 0px;
-      }
-      #messages li {
-        padding: 0.25em;
-      }
-      #messages li:nth-child(odd) {
-        background-color: #efefef;
-      }
-    </style>
+    <title>VulnerChat</title>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="js/main.js"></script>
   </head>
   <body>
+
     <!-- only displayed until the user joins the chat -->
     <div id="enter_id">
-      <form action="">
-        <input type="text" id="user_name" value="Random User" />
+      <form>
+        <input type="text" id="user_name" placeholder="Random User" />
         <button>Chat</button>
       </form>
     </div>
@@ -92,33 +25,52 @@
       </form>
     </div>
 
-    <!-- chat mechanics -->
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      var socket = io();
+    <!-- help -->
+    <div id="help">
+      <h2>Help</h1>
+      <ul id="goals">
+        * Everything here is Case sensitive<br /><br />
+        <b>Goals</b> (Order doesn't matter)<br />
+        When you complete a token, you will find a success string. Send it to us.
+        <li>
+          Enter the invites only room.
+        </li>
+        <li>
+          Enter the password protected room.
+        </li>
+        <li>
+          Become and admin.
+        </li>
+        <li>
+          Find the unlisted (secret) room.
+        </li>
+      </ul>
 
-      $('#enter_id form').submit(function(){
-        socket.emit('user_login', $('#user_name').val());
-        $('#enter_id').hide('slow');
-        $('#chat').show('fast');
-        return false;
-      });
-
-      $('#chat form').submit(function(){
-        socket.emit('chat_message', { 'user': $('#user_name').val(), 'message': $('#msg').val() } );
-        $('#msg').val('');
-        return false;
-      });
-      socket.on('chat_message', function(msg_obj){
-        if (msg.user == $('#user_name').val()) {
-          // your own message
-          $('#messages').append($('<li>').html(msg_obj.message));
-        } else {
-          // someone else sent this
-          $('#messages').append($('<li>').html('<span class="user_name">' + msg_obj.user + ':</span> ' + msg_obj.message));
-        }
-      });
-    </script>
+      <ul id="cmds">
+        <b>Commands</b><br />
+        HOWTO use commands: /cmd_name argument_name:data (without space after or before the colon)<br /><br />
+        <li>
+          <b>/info</b> - Print room info.
+        </li>
+        <li>
+          <b>/list</b> - Print all of the rooms.
+        </li>
+        <li>
+          <b>/current</b> - Print the room you are in currently.
+        </li>
+        <li>
+          <b>/enter</b> - (arguments: name, token) Enter a room. If room needs token, just give it to him. If you dont have a token, just get one.
+        </li>
+        <li>
+          <b>/token</b> - (arguments: name, password) Gets a one time token for a room. Must provide password.
+        </li>
+        <li>
+          <b>/admin</b> - (argument: password) Get admin with a password.
+        </li>
+        <li>
+          <b>/hint</b> - (argument: num) num is the goal's number. Use only if you really need it. Using hints is logged to the system.
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

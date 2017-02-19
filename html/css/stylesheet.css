@@ -1,0 +1,91 @@
+/* palette: http://www.colourlovers.com/palette/3841867/Likes */
+/* hope (blue) #28C7EF */
+/* agatha #1 (pink) #B01468 */
+/* purple/pink #740565 */
+/* black #121212 */
+/* white #ffffff */
+body {
+  color: #ededed;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 18pt;
+  padding: 2em;
+}
+input, textarea, select, button {
+  color: #121212;
+  font-size: 18pt;
+}
+button {
+  background: #28C7EF;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: none;
+  color: #ffffff;
+  padding: 0.25em;
+}
+
+span.user_name {
+  color: #787878;
+  font-size: 0.8em;
+}
+
+#enter_id {}
+#enter_id form {}
+#enter_id form input[type="text"] {
+  padding: 0.25em;
+  width: 15em;
+}
+
+#chat {
+  width: 75%;
+  display: none;
+  position: relative;
+}
+#chat form {
+  bottom: 1em;
+  text-align: right;
+  position: fixed;
+}
+#chat form #msg {
+  padding: 0.25em;
+  text-align: left;
+  width: 70em;
+}
+#chat form button {
+  margin-top: 0.25em;
+  width: 5em;
+}
+
+#messages {
+  word-wrap: break-word;
+
+  color: #121212;
+  list-style-type: none;
+  margin: 0px;
+  margin-bottom: 100px;
+  padding: 0px;
+}
+#messages li {
+  padding: 0.25em;
+}
+#messages li:nth-child(odd) {
+  background-color: #efefef;
+}
+
+#help {
+  overflow: scroll;
+  height: 85%;
+  line-height: 1.5em;
+  font-size: 18px;
+  width: 20%;
+  position: fixed;
+  color: black;
+  top: 0;
+  right: 50px;
+  background-color: white;
+}
+
+#goals {
+  list-style-type: decimal;
+}
