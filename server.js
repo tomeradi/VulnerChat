@@ -4,7 +4,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
-var uuid = require('node-uuid');
 var base64 = require('base-64');
 var sleep = require('sleep');
 var sanitizer = require('sanitizer');
@@ -77,6 +76,18 @@ function send_message(msg_obj, roomToken) {
 	timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
 	msg_obj['timestamp'] = timestamp;
 	io.sockets.in(roomToken).emit('chat_message', msg_obj);
+}
+
+/* Generate string */
+function makeid(len)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < len; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }
 
 /*
@@ -224,7 +235,7 @@ function execute_command(command, args, socket, user_name) {
 					}
 
 					if (room_password == row.password) {
-						s = uuid.v4();
+						s = makeid(10);
 						room_token = room_name + ';' + s;
 
 						useable_tokens.push(room_token)
