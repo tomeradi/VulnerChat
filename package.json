@@ -11,5 +11,15 @@
 		"type": "git",
 		"url": "git://github.com/tomeradi/VulnerChat.git"
 		},
-	"license" : "MIT"
+	"license" : "MIT",
+	"dependencies": {
+		"base-64": "lastest",
+		"express": "lastest",
+		"http": "lastest",
+		"socket.io": "lastest",
+		"fs": "lastest",
+		"sqlite3": "lastest",
+		"sleep": "lastest",
+		"sanitizer": "lastest"
+	}
 }
