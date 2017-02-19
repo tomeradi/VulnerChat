@@ -11,5 +11,8 @@
 		"type": "git",
 		"url": "git://github.com/tomeradi/VulnerChat.git"
 		},
-	"license" : "MIT"
+	"license" : "MIT",
+	"dependencies": {
+		"randomstring": "lastest"
+	}
 }
