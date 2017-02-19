@@ -8,6 +8,8 @@
 		},
 	"license" : "MIT",
 	"dependencies": {
+		"nan": "./packages/nan",
+		"node-pre-gyp": "./packages/node-pre-gyp",
 		"base-64": "./packages/base64",
 		"express": "./packages/express",
 		"http": "./packages/http",
