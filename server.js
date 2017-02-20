@@ -400,13 +400,13 @@ io.on('connection', function(socket){
 		msg.message = sanitizer.escape(msg.message);
 
 		var addr = socket.request.connection.remoteAddress;
-		logMessage(addr.split(":").pop(), msg);
+		var ip = addr.split(":").pop();
+		logMessage(ip, msg);
 
-    console.log(msg.user + ' says:' + msg.message);
+    console.log('[' + ip + '] {' + msg.user + '} says:' + msg.message);
 
 		//check if command
 		if (msg.message.indexOf("/") == 0) {
-			console.log("has /");
 			var command_wth_args = msg.message.substring(1);
 			var command = command_wth_args.split(" ")[0];
 			var args = command_wth_args.split(" ").slice(1);
