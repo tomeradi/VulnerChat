@@ -336,7 +336,7 @@ function execute_command(command, args, socket, user_name) {
 					var end = process.hrtime(start);
 					//var time = end[0] + Math.trunc(end[1]/1000000)/1000;
 					time = end[1]/1000000;
-					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Wrong password. (' + time + ' miliseconds)'};
+					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Wrong password. (Command ran for ' + time + ' miliseconds)'};
 					socket.emit('chat_message', msg);
 					return;
 				} else {
