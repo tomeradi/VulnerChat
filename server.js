@@ -11,6 +11,7 @@ var sanitizer = require('sanitizer');
 // Variables
 var users = {};
 var useable_tokens = [];
+var used_tokens = [];
 var admin_pass = '0528776';
 
 // user info & db
@@ -126,18 +127,27 @@ function check_if_user_can_enter(room_name, user_name, password, socket) {
 					socket.emit('chat_message', msg);
 					return;
 				}
-				if (password.split(";")[0] != room_name) {
+
+				var password_parts = password.split(";");
+				if (password_parts[0] != room_name) {
 					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Token is incorrect.' };
 					socket.emit('chat_message', msg);
 					return;
 				}
-				var index = useable_tokens.indexOf(password);
+
+				var index = useable_tokens.indexOf(password_parts[1]);
 				if (index == -1) {
-					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Token is used or incorrect.' };
+					if (used_tokens.indexOf(password_parts[1]) > -1) {
+						msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Token is used.' };
+						socket.emit('chat_message', msg);
+						return;
+					}
+					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Token is incorrect.' };
 					socket.emit('chat_message', msg);
 					return;
 				} else {
 					useable_tokens.splice(index, 1);
+					used_tokens.push(password_parts[1]);
 				}
 			}
 
@@ -238,7 +248,7 @@ function execute_command(command, args, socket, user_name) {
 						s = makeid(10);
 						room_token = room_name + ';' + s;
 
-						useable_tokens.push(room_token)
+						useable_tokens.push(s);
 						msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Token: ' + base64.encode(room_token) };
 						socket.emit('chat_message', msg);
 					} else {
