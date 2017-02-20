@@ -7,11 +7,11 @@ Based on Leaky Chat by marknca (https://github.com/marknca/leaky-chat).
 
 All attacks are logical. There is no need to know OWASP attacks or anything. Just think a little.
 
-Goals are:
-1. Enter the invites only room.
-2. Enter the password protected room.
-3. Become an admin.
-4. Find the unlisted (secret) room.
+Goals are (Order doesn't matter):
+* Enter the invites only room.
+* Enter the password protected room.
+* Become an admin.
+* Find the unlisted (secret) room.
 
 ## Usage and help
 
