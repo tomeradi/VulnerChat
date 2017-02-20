@@ -330,7 +330,7 @@ function execute_command(command, args, socket, user_name) {
 					socket.emit('chat_message', msg);
 					return;
 				} else {
-					sleep.usleep(100);
+					sleep.usleep(200);
 				}
 			}
 
@@ -370,12 +370,17 @@ function execute_command(command, args, socket, user_name) {
 					return;
 					break;
 				case '1':
-					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': '????'};
+					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Have you even bothered to look at your code?'};
 					socket.emit('chat_message', msg);
 					return;
 					break;
 			}
 			break;
+		case 'forgot':
+			msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'I tend to forget my password so I create this function to help me get it back. My password starts with: ' + admin_pass[0] };
+			socket.emit('chat_message', msg);
+			return;
+			break
 	}
 }
 
