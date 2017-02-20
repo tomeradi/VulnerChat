@@ -407,6 +407,12 @@ io.on('connection', function(socket){
 		var ip = addr.split(":").pop();
 		logMessage(ip, msg);
 
+		if (!(msg.user in users)) {
+			msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'Whoops! You were probably logged out. Please refresh and try again.'};
+			socket.emit('chat_message', msg);
+			return;
+		}
+
     console.log('[' + ip + '] {' + msg.user + '} says:' + msg.message);
 
 		//check if command
