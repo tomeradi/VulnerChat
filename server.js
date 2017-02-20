@@ -330,7 +330,7 @@ function execute_command(command, args, socket, user_name) {
 					socket.emit('chat_message', msg);
 					return;
 				} else {
-					sleep.usleep(200);
+					sleep.usleep(400);
 				}
 			}
 
