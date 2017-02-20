@@ -11,7 +11,7 @@ var sanitizer = require('sanitizer');
 // Variables
 var users = {};
 var useable_tokens = [];
-var admin_pass = '123456';
+var admin_pass = '0528776';
 
 // user info & db
 var db = new sqlite3.Database('leakychat.db');
