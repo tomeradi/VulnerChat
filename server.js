@@ -415,7 +415,7 @@ io.on('connection', function(socket){
 		}
 
 		// Insert to DB unless public room
-		if (users[msg.user]["room_token"] != "public") {
+		if (false && users[msg.user]["room_token"] != "public") {
 			timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
 			db.run("INSERT INTO messages (user_name, timestamp, body, room_name) VALUES (?, ?, ?, ?)", msg.user, timestamp, msg.message, users[msg.user]["room_token"])
 		}
