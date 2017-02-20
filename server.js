@@ -169,7 +169,7 @@ function add_user_to_room(user_name, socket, room_name) {
 	// return the messages from the chat history to this user
 	db.each("SELECT user_name, body, timestamp FROM messages WHERE room_name = ? ORDER BY timestamp", [room_name], function (err, row) {
 		if (!err) {
-			console.log(row.body);
+
 			socket.emit('chat_message', { 'user': row.user_name, 'message': row.body });
 		}
 	});
@@ -265,7 +265,6 @@ function execute_command(command, args, socket, user_name) {
 
 			db.get("SELECT room_desc FROM rooms WHERE room_name = ?", room_name, function(err, row) {
 				if (err || !row) {
-					console.log(err);
 					msg = { 'user': 'CHATBOT(ONLY-YOU)', 'message': 'No such room.' };
 					socket.emit('chat_message', msg);
 					return;
@@ -387,7 +386,7 @@ io.on('connection', function(socket){
 	// No room name means public room.
   socket.on('user_login', function(user_name) {
 		user_name = sanitizer.escape(user_name);
-  	console.log('new user: ' + user_name);
+  	console.log('New user: ' + user_name);
 		add_user_to_room(user_name, socket, "public", "0");
   });
 
