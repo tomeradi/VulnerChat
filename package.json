@@ -11,14 +11,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "base-64": "./packages/base64",
-    "express": "./packages/express",
-    "http": "./packages/http",
-    "socket.io": "./packages/socket.io",
-    "fs": "./packages/fs",
+    "base-64": "latest",
+    "express": "latest",
+    "http": "latest",
+    "socket.io": "latest",
+    "fs": "latest",
     "sqlite3": "latest",
-    "sleep": "./packages/sleep",
-    "sanitizer": "./packages/sanitizer"
+    "sleep": "latest",
+    "sanitizer": "latest"
   },
   "scripts": {
     "start": "node server.js"
