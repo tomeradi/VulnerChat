@@ -401,15 +401,24 @@ io.on('connection', function(socket){
 	// No room name means public room.
   socket.on('user_login', function(user_name) {
 		user_name = sanitizer.escape(user_name);
-  	console.log('New user: ' + user_name);
+
+		var addr = socket.request.connection.remoteAddress;
+		var ip = addr.split(":").pop();
+  	console.log('[' + ip + '] ' + 'New user: ' + user_name);
 		add_user_to_room(user_name, socket, "public", "0");
   });
 
   socket.on('disconnect', function() {
-    console.log('disconnect');
+		var addr = socket.request.connection.remoteAddress;
+		var ip = addr.split(":").pop();
+    console.log('[' + ip + '] disconnect');
   });
 
   socket.on('chat_message', function(msg){
+		if (!msg.message) {
+			return;
+		}
+		
 		msg.user = sanitizer.escape(msg.user);
 		msg.message = sanitizer.escape(msg.message);
 
